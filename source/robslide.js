@@ -18,7 +18,7 @@
     width: 500,
     height: 300,
     delay: 5000,
-    transition: 2000,
+    speed: 2000,
     slides: [
       {
         title: 'Test Slide #1',
@@ -44,29 +44,49 @@
     this.options = $.extend({}, defaults, options);
     this.defaults = defaults;
     this.name = plugin_name;
-    this.slide_count = this.options.slides.length;
-    $(this.element).append('<div id="robslide-background"/>');
-    $(this.element).append('<div id="robslide-foreground"/>');
-    this.background_element = $(this.element).find('#robslide-background');
-    this.foreground_element = $(this.element).find('#robslide-foreground');
     this.init();
   }
 
   RobSlide.prototype.init = function () {
     var that = this;
+    $(this.element).append('<div id="robslide-foreground"/>');
+    $(this.element).append('<div id="robslide-background"/>'); // TODO: is there a way of doing the following 4 lines (inclusive) in 2?    
+    var background_element = $(this.element).find('#robslide-background');
+    var foreground_element = $(this.element).find('#robslide-foreground');
+    var interval_id = -1; // initialized to something invalid
+    var current_slide_id = 0; // initialized to the first slide in the list
+    var next_slide_id = 1;
+    var slide_count = this.options.slides.length;
+
     create_containers();
     // load_data();
     // load_images();
     configure_containers();
+    start();
+
     console.log("robslide initialized");
 
+
+    // Helper methods
+    // --------------
+
+    function stop () {
+      clearInterval(interval_id);
+      console.log("robslide stopped");
+    }
+
+    function start () {
+      interval_id = setInterval(switch_slides, that.options.delay);
+      console.log("robslide started");
+    };
+
     function create_containers () {
-      that.background_element.append('<h2 class="robslide-title"/>');
-      that.background_element.append('<div class="robslide-body"/>');
-      that.background_element.append('<a class="robslide-link"/>');
-      that.foreground_element.append('<h2 class="robslide-title"/>');
-      that.foreground_element.append('<div class="robslide-body"/>');
-      that.foreground_element.append('<a class="robslide-link"/>');
+      background_element.append('<h2 class="robslide-title"/>');
+      background_element.append('<div class="robslide-body"/>');
+      background_element.append('<a class="robslide-link"/>');
+      foreground_element.append('<h2 class="robslide-title"/>');
+      foreground_element.append('<div class="robslide-body"/>');
+      foreground_element.append('<a class="robslide-link"/>');
 
       console.log("robslide containers created");
     };
@@ -86,20 +106,22 @@
     function configure_containers () {
       // Set CSS positioning so background and foreground overlap
       $(that.element).css('position', 'relative');
-      that.background_element.css('position', 'absolute');
-      that.background_element.css('top', 0);
-      that.background_element.css('left', 0);
-      that.foreground_element.css('position', 'absolute');
-      that.foreground_element.css('top', 0);
-      that.foreground_element.css('left', 0);
+      background_element.css('position', 'absolute');
+      background_element.css('top', 0);
+      background_element.css('left', 0);
+      background_element.css('z-index', 1);
+      foreground_element.css('position', 'absolute');
+      foreground_element.css('top', 0);
+      foreground_element.css('left', 0);
+      foreground_element.css('z-index', 2);
 
       // Set slideshow height and width
-      that.background_element.css('width', that.options.width);
-      that.background_element.css('height', that.options.height);
-      that.foreground_element.css('width', that.options.width);
-      that.foreground_element.css('height', that.options.height);
-      load_slide(that.background_element, that.options.slides[0]);
-      load_slide(that.foreground_element, that.options.slides[1]);
+      background_element.css('width',  that.options.width);
+      background_element.css('height', that.options.height);
+      foreground_element.css('width',  that.options.width);
+      foreground_element.css('height', that.options.height);
+      load_slide(foreground_element, that.options.slides[0]);
+      load_slide(background_element, that.options.slides[1]); // the background is set to slide #2 (so the foreground slide #1 will fade into the background, switching to the 'next' slide)
 
       console.log("robslide containers configured");
     };
@@ -132,15 +154,26 @@
       }
     };
 
-    // var start_slideshow = function () {
-    //   this.setInterval(switch_slides, this._defaults.delay);
-    //   console.log("robslide started");
-    // };
-
+    // Change foreground revealing background, move bg to fg, turn fg back on, and load next slide into bg (then repeat)
     function switch_slides () {
+      // Animate to next slide by facing opacity of foreground from 100% to 0%
+      foreground_element.animate({ opacity: 0 }, that.options.speed, function () {
+        load_slide(foreground_element, that.options.slides[current_slide_id]);
+        foreground_element.css('opacity', 1); // turn foreground on full opacity
+        load_slide(background_element, that.options.slides[next_slide_id]); // load next slide into background
+      });
 
+      // Update slide_id's
+      current_slide_id += 1; //next_slide_id - 1;
+      if (current_slide_id >= slide_count) {
+        current_slide_id = 0;
+      }
+      next_slide_id = current_slide_id + 1;
+      if (next_slide_id >= slide_count) {
+        next_slide_id = 0;
+      }
     };
-    
+
   };
 
   // A really lightweight plugin wrapper around the constructor, preventing against multiple instantiations.
