@@ -92,12 +92,23 @@
   };
 
   RobSlide.prototype.configure_containers = function () {
+    // Set CSS positioning so background and foreground overlap
+    $(this.element).css('position', 'relative');
+    this.background_element.css('position', 'absolute');
+    this.background_element.css('top', 0);
+    this.background_element.css('left', 0);
+    this.foreground_element.css('position', 'absolute');
+    this.foreground_element.css('top', 0);
+    this.foreground_element.css('left', 0);
+
+    // Set slideshow height and width
     this.background_element.css('width', this.options.width);
     this.background_element.css('height', this.options.height);
     this.foreground_element.css('width', this.options.width);
     this.foreground_element.css('height', this.options.height);
     this.load_slide(this.background_element, this.options.slides[0]);
     this.load_slide(this.foreground_element, this.options.slides[1]);
+    
     console.log("robslide containers configured");
   };
 
