@@ -53,100 +53,94 @@
   }
 
   RobSlide.prototype.init = function () {
-    this.create_containers();
+    var that = this;
+    create_containers();
     // load_data();
     // load_images();
-    this.configure_containers();
-    //start_slideshow();
-    //this.setInterval(switch_slides, this.options.delay);
+    configure_containers();
     console.log("robslide initialized");
-  };
 
-  // <div id='homepage-slideshow-foreground' style="background: url('/system/images/something.png') center 0 no-repeat;">
-  //   <h2 class='homepage-slideshow-title'>Another Slide</h2>
-  //   <div class='homepage-slideshow-content'>
-  //     <p>Some text as an example of a description.</p>
-  //   </div>
-  //   <a href="" class="homepage-slideshow-button button secondary">Test Button</a>
-  // </div>
-  RobSlide.prototype.create_containers = function () {
-    this.background_element.append('<h2 class="robslide-title"/>');
-    this.background_element.append('<div class="robslide-body"/>');
-    this.background_element.append('<a class="robslide-link"/>');
-    this.foreground_element.append('<h2 class="robslide-title"/>');
-    this.foreground_element.append('<div class="robslide-body"/>');
-    this.foreground_element.append('<a class="robslide-link"/>');
-    console.log("robslide containers created");
-  };
+    function create_containers () {
+      that.background_element.append('<h2 class="robslide-title"/>');
+      that.background_element.append('<div class="robslide-body"/>');
+      that.background_element.append('<a class="robslide-link"/>');
+      that.foreground_element.append('<h2 class="robslide-title"/>');
+      that.foreground_element.append('<div class="robslide-body"/>');
+      that.foreground_element.append('<a class="robslide-link"/>');
 
-  RobSlide.prototype.load_data = function () {
-    console.log("robslide data loaded");
-  };
+      console.log("robslide containers created");
+    };
 
-  RobSlide.prototype.load_images = function () {
-    var stuff = "";
-    for (var i = 0; i < this.slide_count; i += 1) {
-      stuff += ", " + this.options.slides[i].image_url;
-    }
-    console.log("robslide images loaded");
-  };
+    function load_data () {
+      console.log("robslide data loaded");
+    };
 
-  RobSlide.prototype.configure_containers = function () {
-    // Set CSS positioning so background and foreground overlap
-    $(this.element).css('position', 'relative');
-    this.background_element.css('position', 'absolute');
-    this.background_element.css('top', 0);
-    this.background_element.css('left', 0);
-    this.foreground_element.css('position', 'absolute');
-    this.foreground_element.css('top', 0);
-    this.foreground_element.css('left', 0);
+    function load_images () {
+      var stuff = "";
+      for (var i = 0; i < that.slide_count; i += 1) {
+        stuff += ", " + that.options.slides[i].image_url;
+      }
+      console.log("robslide images loaded");
+    };
 
-    // Set slideshow height and width
-    this.background_element.css('width', this.options.width);
-    this.background_element.css('height', this.options.height);
-    this.foreground_element.css('width', this.options.width);
-    this.foreground_element.css('height', this.options.height);
-    this.load_slide(this.background_element, this.options.slides[0]);
-    this.load_slide(this.foreground_element, this.options.slides[1]);
+    function configure_containers () {
+      // Set CSS positioning so background and foreground overlap
+      $(that.element).css('position', 'relative');
+      that.background_element.css('position', 'absolute');
+      that.background_element.css('top', 0);
+      that.background_element.css('left', 0);
+      that.foreground_element.css('position', 'absolute');
+      that.foreground_element.css('top', 0);
+      that.foreground_element.css('left', 0);
+
+      // Set slideshow height and width
+      that.background_element.css('width', that.options.width);
+      that.background_element.css('height', that.options.height);
+      that.foreground_element.css('width', that.options.width);
+      that.foreground_element.css('height', that.options.height);
+      load_slide(that.background_element, that.options.slides[0]);
+      load_slide(that.foreground_element, that.options.slides[1]);
+
+      console.log("robslide containers configured");
+    };
+
+    function load_slide (el, data) {
+      // Title
+      el.find('h2.robslide-title').html(data.title);
+
+      // Body
+      el.find('div.robslide-body').html(data.body);
+
+      // Link / Button
+      if (data.link_label !== '' && data.link_url !== '') { // Only show the link/button if data is available for it.
+        el.find('a.robslide-link').html(data.link_label);
+        el.find('a.robslide-link').attr('href', data.link_url);
+      } else { // Hide the link/button if there's no data for it.
+        el.find('a.robslide-link').hide();
+      }
+
+      // Background Color
+      if (data.bg_color !== '') {
+        el.css('background-color', data.bg_color);
+      }
+
+      // Background Image
+      if (data.image_url !== '') {
+        el.css('background-image', "url('" + data.image_url + "')");
+        el.css('background-repeat', 'no-repeat');
+        el.css('background-position', '0 0');
+      }
+    };
+
+    // var start_slideshow = function () {
+    //   this.setInterval(switch_slides, this._defaults.delay);
+    //   console.log("robslide started");
+    // };
+
+    function switch_slides () {
+
+    };
     
-    console.log("robslide containers configured");
-  };
-
-  RobSlide.prototype.load_slide = function (element, data) {
-    // Title
-    element.find('h2.robslide-title').html(data.title);
-
-    // Body
-    element.find('div.robslide-body').html(data.body);
-
-    // Link / Button
-    if (data.link_label !== '' && data.link_url !== '') { // Only show the link/button if data is available for it.
-      element.find('a.robslide-link').html(data.link_label);
-      element.find('a.robslide-link').attr('href', data.link_url);
-    } else { // Hide the link/button if there's no data for it.
-      element.find('a.robslide-link').hide();
-    }
-
-    // Background Color
-    if (data.bg_color !== '') {
-      element.css('background-color', data.bg_color);
-    }
-
-    // Background Image
-    if (data.image_url !== '') {
-      element.css('background-image', "url('" + data.image_url + "')");
-      element.css('background-repeat', 'no-repeat');
-      element.css('background-position', '0 0');
-    }
-  };
-
-  // var start_slideshow = function () {
-  //   this.setInterval(switch_slides, this._defaults.delay);
-  //   console.log("robslide started");
-  // };
-
-  RobSlide.prototype.switch_slides = function () {
-
   };
 
   // A really lightweight plugin wrapper around the constructor, preventing against multiple instantiations.
