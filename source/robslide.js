@@ -15,22 +15,28 @@
 
   var plugin_name = 'robslide';
   var defaults = {
+    width: 500,
+    height: 300,
     delay: 5000,
-    transition_delay: 2000,
+    transition: 2000,
     slides: [
       {
         title: 'Test Slide #1',
         body: 'Example body text',
+        title_color: '#fff',
+        body_color: '#eee',
         bg_color: '#333',
-        image_url: 'aaaaaaaaa',
+        image_url: '',
         link_label: 'Test Button',
         link_url: 'http://testlocation.com'
       },
       {
         title: 'Test Slide #2',
         body: 'More body text',
+        title_color: '#000',
+        body_color: '#222',
         bg_color: '#999',
-        image_url: 'bbbbbbbbb',
+        image_url: '',
         link_label: 'Test Button',
         link_url: 'http://testlocation.com'
       }
@@ -54,7 +60,7 @@
     this.create_containers();
     // load_data();
     // load_images();
-    //this.configure_containers();
+    this.configure_containers();
     //start_slideshow();
     //this.setInterval(switch_slides, this.options.delay);
     console.log("robslide initialized");
@@ -114,21 +120,21 @@
     }
 
     // Second Slide
-    $('#robslide-foreground').find('h2.robslide-title').html(first_slide.title);
-    $('#robslide-foreground').find('div.robslide-body').html(first_slide.body);
-    if (first_slide.link_label !== '' && first_slide.link_url !== '') { // Link / Button
+    $('#robslide-foreground').find('h2.robslide-title').html(second_slide.title);
+    $('#robslide-foreground').find('div.robslide-body').html(second_slide.body);
+    if (second_slide.link_label !== '' && second_slide.link_url !== '') { // Link / Button
       // Only show the link/button if data is available for it.
-      $('#robslide-foreground').find('a.robslide-link').html(first_slide.link_label);
-      $('#robslide-foreground').find('a.robslide-link').attr('href', first_slide.link_url);
+      $('#robslide-foreground').find('a.robslide-link').html(second_slide.link_label);
+      $('#robslide-foreground').find('a.robslide-link').attr('href', second_slide.link_url);
     } else {
       // Hide the link/button if there's no data for it.
       $('#robslide-foreground').find('a.robslide-link').hide();
     }
-    if (first_slide.bg_color !== '') { // Background Color
-      $('#robslide-foreground').css('background-color', first_slide.bg_color);
+    if (second_slide.bg_color !== '') { // Background Color
+      $('#robslide-foreground').css('background-color', second_slide.bg_color);
     }
-    if (first_slide.image_url !== '') { // Background Image
-      $('#robslide-foreground').css('background-image', "url('" + first_slide.image_url + "')");
+    if (second_slide.image_url !== '') { // Background Image
+      $('#robslide-foreground').css('background-image', "url('" + second_slide.image_url + "')");
       $('#robslide-foreground').css('background-repeat', 'no-repeat');
       $('#robslide-foreground').css('background-position', '0 0');
     }
