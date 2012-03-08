@@ -23,8 +23,6 @@
       {
         title: 'Test Slide #1',
         body: 'Example body text',
-        title_color: '#fff',
-        body_color: '#eee',
         bg_color: '#333',
         image_url: '',
         link_label: 'Test Button',
@@ -33,8 +31,6 @@
       {
         title: 'Test Slide #2',
         body: 'More body text',
-        title_color: '#000',
-        body_color: '#222',
         bg_color: '#999',
         image_url: '',
         link_label: 'Test Button',
@@ -148,14 +144,10 @@
 
   RobSlide.prototype.load_slide = function (element, data) {
     // Title
-    var title_element = element.find('h2.robslide-title');
-    title_element.html(data.title);
-    title_element.css('color', data.title_color);
+    element.find('h2.robslide-title').html(data.title);
 
     // Body
-    var body_element = element.find('div.robslide-body');
-    body_element.html(data.body);
-    body_element.css('color', data.body_color);
+    element.find('div.robslide-body').html(data.body);
 
     // Link / Button
     if (data.link_label !== '' && data.link_url !== '') { // Only show the link/button if data is available for it.
