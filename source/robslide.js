@@ -96,51 +96,75 @@
   };
 
   RobSlide.prototype.configure_containers = function () {
-    var first_slide = this.options.slides[0];
-    var second_slide = this.options.slides[1]; // TODO: This is assuming there actually are two slides; make this more generic with sensible fallbacks.
+    // var first_slide = this.options.slides[0];
+    // var second_slide = this.options.slides[1]; // TODO: This is assuming there actually are two slides; make this more generic with sensible fallbacks.
 
     // First Slide
-    $('#robslide-background').find('h2.robslide-title').html(first_slide.title);
-    $('#robslide-background').find('div.robslide-body').html(first_slide.body);
-    if (first_slide.link_label !== '' && first_slide.link_url !== '') { // Link / Button
-      // Only show the link/button if data is available for it.
-      $('#robslide-background').find('a.robslide-link').html(first_slide.link_label);
-      $('#robslide-background').find('a.robslide-link').attr('href', first_slide.link_url);
-    } else {
-      // Hide the link/button if there's no data for it.
-      $('#robslide-background').find('a.robslide-link').hide();
-    }
-    if (first_slide.bg_color !== '') { // Background Color
-      $('#robslide-background').css('background-color', first_slide.bg_color);
-    }
-    if (first_slide.image_url !== '') { // Background Image
-      $('#robslide-background').css('background-image', "url('" + first_slide.image_url + "')");
-      $('#robslide-background').css('background-repeat', 'no-repeat');
-      $('#robslide-background').css('background-position', '0 0');
-    }
+    // $('#robslide-background').find('h2.robslide-title').html(first_slide.title);
+    // $('#robslide-background').find('div.robslide-body').html(first_slide.body);
+    // if (first_slide.link_label !== '' && first_slide.link_url !== '') { // Link / Button
+    //   // Only show the link/button if data is available for it.
+    //   $('#robslide-background').find('a.robslide-link').html(first_slide.link_label);
+    //   $('#robslide-background').find('a.robslide-link').attr('href', first_slide.link_url);
+    // } else {
+    //   // Hide the link/button if there's no data for it.
+    //   $('#robslide-background').find('a.robslide-link').hide();
+    // }
+    // if (first_slide.bg_color !== '') { // Background Color
+    //   $('#robslide-background').css('background-color', first_slide.bg_color);
+    // }
+    // if (first_slide.image_url !== '') { // Background Image
+    //   $('#robslide-background').css('background-image', "url('" + first_slide.image_url + "')");
+    //   $('#robslide-background').css('background-repeat', 'no-repeat');
+    //   $('#robslide-background').css('background-position', '0 0');
+    // }
 
     // Second Slide
-    $('#robslide-foreground').find('h2.robslide-title').html(second_slide.title);
-    $('#robslide-foreground').find('div.robslide-body').html(second_slide.body);
-    if (second_slide.link_label !== '' && second_slide.link_url !== '') { // Link / Button
-      // Only show the link/button if data is available for it.
-      $('#robslide-foreground').find('a.robslide-link').html(second_slide.link_label);
-      $('#robslide-foreground').find('a.robslide-link').attr('href', second_slide.link_url);
-    } else {
-      // Hide the link/button if there's no data for it.
-      $('#robslide-foreground').find('a.robslide-link').hide();
-    }
-    if (second_slide.bg_color !== '') { // Background Color
-      $('#robslide-foreground').css('background-color', second_slide.bg_color);
-    }
-    if (second_slide.image_url !== '') { // Background Image
-      $('#robslide-foreground').css('background-image', "url('" + second_slide.image_url + "')");
-      $('#robslide-foreground').css('background-repeat', 'no-repeat');
-      $('#robslide-foreground').css('background-position', '0 0');
-    }
+    // $('#robslide-foreground').find('h2.robslide-title').html(second_slide.title);
+    // $('#robslide-foreground').find('div.robslide-body').html(second_slide.body);
+    // if (second_slide.link_label !== '' && second_slide.link_url !== '') { // Link / Button
+    //   // Only show the link/button if data is available for it.
+    //   $('#robslide-foreground').find('a.robslide-link').html(second_slide.link_label);
+    //   $('#robslide-foreground').find('a.robslide-link').attr('href', second_slide.link_url);
+    // } else {
+    //   // Hide the link/button if there's no data for it.
+    //   $('#robslide-foreground').find('a.robslide-link').hide();
+    // }
+    // if (second_slide.bg_color !== '') { // Background Color
+    //   $('#robslide-foreground').css('background-color', second_slide.bg_color);
+    // }
+    // if (second_slide.image_url !== '') { // Background Image
+    //   $('#robslide-foreground').css('background-image', "url('" + second_slide.image_url + "')");
+    //   $('#robslide-foreground').css('background-repeat', 'no-repeat');
+    //   $('#robslide-foreground').css('background-position', '0 0');
+    // }
+
+    this.load_slide($('#robslide-background'), this.options.slides[0]);
+    this.load_slide($('#robslide-foreground'), this.options.slides[1]);
     
     // TODO: A lot of these elements are being called through jQuery's selector syntax over and over; find a more efficient way of doing this.
     console.log("robslide containers configured");
+  };
+
+  RobSlide.prototype.load_slide = function (element, data) {
+    element.find('h2.robslide-title').html(data.title);
+    element.find('div.robslide-body').html(data.body);
+    if (data.link_label !== '' && data.link_url !== '') { // Link / Button
+      // Only show the link/button if data is available for it.
+      element.find('a.robslide-link').html(data.link_label);
+      element.find('a.robslide-link').attr('href', data.link_url);
+    } else {
+      // Hide the link/button if there's no data for it.
+      element.find('a.robslide-link').hide();
+    }
+    if (data.bg_color !== '') { // Background Color
+      element.css('background-color', data.bg_color);
+    }
+    if (data.image_url !== '') { // Background Image
+      element.css('background-image', "url('" + data.image_url + "')");
+      element.css('background-repeat', 'no-repeat');
+      element.css('background-position', '0 0');
+    }
   };
 
   // var start_slideshow = function () {
