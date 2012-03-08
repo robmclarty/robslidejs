@@ -147,20 +147,31 @@
   };
 
   RobSlide.prototype.load_slide = function (element, data) {
-    element.find('h2.robslide-title').html(data.title);
-    element.find('div.robslide-body').html(data.body);
-    if (data.link_label !== '' && data.link_url !== '') { // Link / Button
-      // Only show the link/button if data is available for it.
+    // Title
+    var title_element = element.find('h2.robslide-title');
+    title_element.html(data.title);
+    title_element.css('color', data.title_color);
+
+    // Body
+    var body_element = element.find('div.robslide-body');
+    body_element.html(data.body);
+    body_element.css('color', data.body_color);
+
+    // Link / Button
+    if (data.link_label !== '' && data.link_url !== '') { // Only show the link/button if data is available for it.
       element.find('a.robslide-link').html(data.link_label);
       element.find('a.robslide-link').attr('href', data.link_url);
-    } else {
-      // Hide the link/button if there's no data for it.
+    } else { // Hide the link/button if there's no data for it.
       element.find('a.robslide-link').hide();
     }
-    if (data.bg_color !== '') { // Background Color
+
+    // Background Color
+    if (data.bg_color !== '') {
       element.css('background-color', data.bg_color);
     }
-    if (data.image_url !== '') { // Background Image
+
+    // Background Image
+    if (data.image_url !== '') {
       element.css('background-image', "url('" + data.image_url + "')");
       element.css('background-repeat', 'no-repeat');
       element.css('background-position', '0 0');
