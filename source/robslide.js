@@ -15,15 +15,15 @@
 
   var plugin_name = 'robslide';
   var defaults = {
-    width: 500,
-    height: 300,
-    delay: 5000,
-    speed: 2000,
+    width: 500,  // pixels
+    height: 300, // pixels
+    delay: 5000, // milliseconds before the next slide will be loaded
+    speed: 2000, // milliseconds transitioning from one slide to the next
     slides: [
       {
         title: 'Test Slide #1',
         body: 'Example body text',
-        bg_color: '#333',
+        bg_color: '#ccc',
         image_url: '',
         link_label: 'Test Button',
         link_url: 'http://testlocation.com'
@@ -49,8 +49,8 @@
 
   RobSlide.prototype.init = function () {
     var that = this;
-    $(this.element).append('<div id="robslide-foreground"/>');
-    $(this.element).append('<div id="robslide-background"/>'); // TODO: is there a way of doing the following 4 lines (inclusive) in 2?    
+    $(this.element).append('<div id="robslide-foreground"/>'); // TODO: is there a way of doing the following 4 lines (inclusive) in 2?
+    $(this.element).append('<div id="robslide-background"/>');
     var background_element = $(this.element).find('#robslide-background');
     var foreground_element = $(this.element).find('#robslide-foreground');
     var interval_id = -1; // initialized to something invalid
@@ -73,10 +73,10 @@
     function stop () {
       clearInterval(interval_id);
       console.log("robslide stopped");
-    }
+    };
 
     function start () {
-      interval_id = setInterval(switch_slides, that.options.delay);
+      interval_id = setInterval(switch_slides, that.options.delay); // TODO: is there a better alternative than setInterval?
       console.log("robslide started");
     };
 
@@ -91,19 +91,10 @@
       console.log("robslide containers created");
     };
 
-    function load_data () {
-      console.log("robslide data loaded");
-    };
-
-    function load_images () {
-      var stuff = "";
-      for (var i = 0; i < that.slide_count; i += 1) {
-        stuff += ", " + that.options.slides[i].image_url;
-      }
-      console.log("robslide images loaded");
-    };
-
     function configure_containers () {
+      // Attach main slideshow class to main container.
+      $(that.element).addClass('robslide');
+
       // Set CSS positioning so background and foreground overlap
       $(that.element).css('position', 'relative');
       background_element.css('position', 'absolute');
@@ -124,6 +115,18 @@
       load_slide(background_element, that.options.slides[1]); // the background is set to slide #2 (so the foreground slide #1 will fade into the background, switching to the 'next' slide)
 
       console.log("robslide containers configured");
+    };
+
+    function load_data () {
+      console.log("robslide data loaded");
+    };
+
+    function load_images () {
+      var stuff = "";
+      for (var i = 0; i < that.slide_count; i += 1) {
+        stuff += ", " + that.options.slides[i].image_url;
+      }
+      console.log("robslide images loaded");
     };
 
     function load_slide (el, data) {

@@ -1,0 +1,81 @@
+/* General styles for all content in the slideshow */
+.robslide {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #000;
+}
+/* Style these three elements in conjunction for general-purpose
+   layout styles (e.g., the padding (actually, margin) around all
+   the inside content elements). */
+h2.robslide-title,
+div.robslide-body,
+a.robslide-link {
+  margin: 20px;
+}
+h2.robslide-title {
+  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+}
+div.robslide-body {
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: normal;  
+  color: #666;
+}
+a.robslide-link,
+a.robslide-link:link,
+a.robslide-link:visited {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #636466 !important;
+  text-shadow: 0 1px 0 white;
+  text-decoration: none;
+  text-transform: uppercase;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+       -o-border-radius: 4px;
+          border-radius: 4px;
+  -webkit-box-shadow: 0 1px 0 0 #888, 0 1px 0 0 white inset;
+     -moz-box-shadow: 0 1px 0 0 #888, 0 1px 0 0 white inset;
+      -ms-box-shadow: 0 1px 0 0 #888, 0 1px 0 0 white inset;
+       -o-box-shadow: 0 1px 0 0 #888, 0 1px 0 0 white inset;
+          box-shadow: 0 1px 0 0 #888, 0 1px 0 0 white inset;
+  background-color: #ccc;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fafafa), to(#ccc));
+  background-image: -webkit-linear-gradient(top, #fafafa, #ccc);
+  background-image:    -moz-linear-gradient(top, #fafafa, #ccc);
+  background-image:     -ms-linear-gradient(top, #fafafa, #ccc);
+  background-image:      -o-linear-gradient(top, #fafafa, #ccc);
+  background-image:         linear-gradient(top, #fafafa, #ccc);
+}
+a.robslide-link:hover,
+a.robslide-link:focus {
+  text-shadow: 0 1px 0 #e6e6e6;
+  background-color: #b5b5b5;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e8e8e8), to(#b5b5b5));
+  background-image: -webkit-linear-gradient(top, #e8e8e8, #b5b5b5);
+  background-image:    -moz-linear-gradient(top, #e8e8e8, #b5b5b5);
+  background-image:     -ms-linear-gradient(top, #e8e8e8, #b5b5b5);
+  background-image:      -o-linear-gradient(top, #e8e8e8, #b5b5b5);
+  background-image:         linear-gradient(top, #e8e8e8, #b5b5b5);
+}
+a.robslide-link:active {
+  text-shadow: 0 1px 0 #e6e6e6;
+  -webkit-box-shadow: 0 1px 0 0 white, 0 1px 1px 0 #666 inset;
+     -moz-box-shadow: 0 1px 0 0 white, 0 1px 1px 0 #666 inset;
+      -ms-box-shadow: 0 1px 0 0 white, 0 1px 1px 0 #666 inset;  
+       -o-box-shadow: 0 1px 0 0 white, 0 1px 1px 0 #666 inset;
+          box-shadow: 0 1px 0 0 white, 0 1px 1px 0 #666 inset;
+  background-color: #adadad;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#adadad), to(#e0e0e0));
+  background-image: -webkit-linear-gradient(top, #adadad, #e0e0e0);
+  background-image:    -moz-linear-gradient(top, #adadad, #e0e0e0);
+  background-image:     -ms-linear-gradient(top, #adadad, #e0e0e0);
+  background-image:      -o-linear-gradient(top, #adadad, #e0e0e0);
+  background-image:         linear-gradient(top, #adadad, #e0e0e0);  
+}
