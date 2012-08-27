@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Image Backgrounds Example | robslidejs</title>
+    <link href="stylesheets/robslide.css" media="all" rel="stylesheet" type="text/css">
+    <style type="text/css">
+      /* Example overrides to customize the design. */
+      h2.robslide-title,
+      div.robslide-body,
+      a.robslide-link {
+        margin: 40px;
+      }
+      h2.robslide-title {
+        margin-bottom: 20px;
+        font-size: 48px;
+        font-weight: bold;
+        color: #fff;
+        text-shadow: 2px 2px #000;
+      }
+      div.robslide-body {
+        font-size: 24px;
+        font-weight: bold;
+        color: #eee;
+        text-shadow: 2px 2px #000;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Image Backgrounds Example</h1>
+    <p>This example is what the slideshow looks like when using full-bleed images for the background.</p>
+    <p>
+      These are photos of painting I took at <a href="http://www.getty.edu/">The Getty</a> when I visited LA in the summer of 2011.
+      I should probably know the titles of these famous paintings, but I can't remember them :P
+    </p>
+    <div id="example-slideshow"></div>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../source/robslide.js"></script>
+    <script type="text/javascript">
+      $(function () {
+        $('#example-slideshow').robslide({
+          width: 450,
+          height: 30,
+          delay: 5000,
+          slides: [
+            {
+              title: 'The Sermon on the Mount',
+              body: 'Brueghel, the Elder, Jan',
+              image_url: 'images/getty_4.jpg'
+            },
+            {
+              title: 'An Example Title',
+              body: 'A painting from The Getty',
+              image_url: 'images/getty_1.jpg'
+            },
+            {
+              title: 'Another Title Example',
+              body: 'A painting from The Getty',
+              image_url: 'images/getty_2.jpg'
+            },
+            {
+              title: 'Yet Another Example Title',
+              body: 'A painting from the Getty',
+              image_url: 'images/getty_3.jpg'
+            },
+            {
+              title: 'Last Title Example',
+              body: 'A painting from The Getty',
+              image_url: 'images/getty_5.jpg'
+            }
+          ]
+        });
+      });
+    </script>
+  </body>
+</html>

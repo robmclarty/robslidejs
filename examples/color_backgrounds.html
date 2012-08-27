@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Color Backgrounds Example | robslidejs</title>
+    <link href="stylesheets/robslide.css" media="all" rel="stylesheet" type="text/css">
+    <style type="text/css">
+      /* Example overrides to customize the design. */
+      h2.robslide-title,
+      div.robslide-body,
+      a.robslide-link {
+        margin: 40px;
+      }
+      h2.robslide-title {
+        margin-bottom: 20px;
+        font-size: 48px;
+        font-weight: bold;
+        color: #fff;
+        text-shadow: 2px 2px #000;
+      }
+      div.robslide-body {
+        font-size: 24px;
+        font-weight: bold;
+        color: #eee;
+        text-shadow: 2px 2px #000;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Color Backgrounds Example</h1>
+    <p>This example is what the slideshow looks like when using simple colored backgrounds with no imagery.</p>
+    <div id="example-slideshow"></div>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../source/robslide.js"></script>
+    <script type="text/javascript">
+      $(function () {
+        $('#example-slideshow').robslide({
+          width: 600,
+          height: 380,
+          delay: 5000,
+          slides: [
+            {
+              title: 'An Example Title',
+              bg_color: '#e03a3e'
+            },
+            {
+              title: 'Another Title Example',
+              bg_color: '#f9c4bc'
+            },
+            {
+              title: 'Yet Another Example Title',
+              bg_color: '#bdd6cb'
+            },
+            {
+              title: 'Last Title Example',
+              bg_color: '#325989'
+            }
+          ]
+        });
+      });
+    </script>
+  </body>
+</html>
