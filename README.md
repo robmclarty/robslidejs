@@ -1,5 +1,5 @@
 # robslidejs
-##### A not-so-advanced jQuery slideshow
+##### A not-so-advanced cross-fading jQuery slideshow plugin
 
 Slides cross-fade from one to the next and can have either colored or imaged backgrounds.
 
