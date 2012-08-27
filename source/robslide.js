@@ -59,8 +59,6 @@
     var slide_count = this.options.slides.length;
 
     create_containers();
-    // load_data();
-    // load_images();
     configure_containers();
     start();
 
@@ -117,18 +115,6 @@
       console.log("robslide containers configured");
     };
 
-    function load_data () {
-      console.log("robslide data loaded");
-    };
-
-    function load_images () {
-      var stuff = "";
-      for (var i = 0; i < that.slide_count; i += 1) {
-        stuff += ", " + that.options.slides[i].image_url;
-      }
-      console.log("robslide images loaded");
-    };
-
     function load_slide (el, data) {
       // Title
       el.find('h2.robslide-title').html(data.title);
@@ -137,7 +123,7 @@
       el.find('div.robslide-body').html(data.body);
 
       // Link / Button
-      if (data.link_label !== '' && data.link_url !== '') { // Only show the link/button if data is available for it.
+      if (data.link_label !== '' && typeof(data.link_label) !== 'undefined' && data.link_url !== '' && typeof(data.link_url) !== 'undefined') { // Only show the link/button if data is available for it.
         el.find('a.robslide-link').html(data.link_label);
         el.find('a.robslide-link').attr('href', data.link_url);
       } else { // Hide the link/button if there's no data for it.
